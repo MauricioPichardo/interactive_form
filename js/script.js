@@ -279,7 +279,7 @@ function validator(){
             zip_label.appendChild(zipWarn);
 
         }else {zipWarn.remove()
-}
+        }
 
 
     //CVV
@@ -298,19 +298,27 @@ function validator(){
               cvv_label.appendChild(cvvWarn);
 
           }else {cvvWarn.remove()
-}
+          }}
 
 
 
-        }
+
 
 //final verificaiton
-    if(cc_ok && zip_ok && cvv_ok && email_ok && name_ok && (cc_spec==false)){
-    warnings=true;} {warnings=false;   console.log(cc_ok, zip_ok, cvv_ok, email_ok, name_ok, cc_spec)}
+if (payment_drop.value=="credit card"){
+  console.log(payment_drop.value);
+  if(cc_ok && zip_ok && cvv_ok && email_ok && name_ok && (cc_spec==false)){
+  warnings=true;}
+  else {warnings=false;}}
+else {
+  console.log(payment_drop.value);
+  if(email_ok && name_ok){warnings=true;}
+  else {warnings=false;}}
+
+
+console.log(cc_ok,zip_ok,cvv_ok, email_ok,name_ok, cc_spec, warnings, scheduling);
 
 }
-
-
 
 
 
@@ -340,11 +348,11 @@ payment_drop.addEventListener("change", function (){
 });
 
 //validator listeners
-name_detail.addEventListener("focusout", function (){
+name_detail.addEventListener("keyup", function (){
   validator();
 });
 
-email_detail.addEventListener("focusout", function (){
+email_detail.addEventListener("keyup", function (){
   validator();
 });
 
@@ -352,7 +360,7 @@ cvv_detail.addEventListener("focusout", function (){
   validator();
 });
 
-cc_detail.addEventListener("focusout", function (){
+cc_detail.addEventListener("keyup", function (){
   validator();
 });
 
@@ -365,9 +373,20 @@ zip_detail.addEventListener("focusout", function (){
 //form submission validation
 document.getElementById("check_submit").addEventListener("click", function(event){
 
+    event.preventDefault()
+      console.log(payment_drop.value);
+      validator();
+      console.log(warnings,scheduling)
 
-    if (warnings && scheduling){}
-    else {event.default()}});
+    if (warnings && scheduling){
+      document.querySelector("form").submit()}
+    else {
+
+    }
+    }
+
+
+    );
 
 
 
