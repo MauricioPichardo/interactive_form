@@ -24,6 +24,7 @@ const btool_class=document.querySelector("input[name='build-tools' ");
 const npm_class=document.querySelector("input[name='npm'");
 
 //Payments parts
+
 const payment_drop= document.getElementById("payment");
 const credit_div= document.getElementById("credit-card");
 const paypal_div= document.getElementById("paypal");
@@ -92,7 +93,9 @@ const checkTheme=() =>{
         for (let i = 3; i < 6; i++) {
         color.options[i].style.display="block";
         }}
-    };
+    else  color_theme.innerHTML= 'Color: <span class="warning"> Selection Required</span>';
+    }
+
 
 // crossEvent Checker (In Progress)
     //Need to set things to aggreate(In Progress)
@@ -150,8 +153,8 @@ var totalCost=0;
     if (jsl_class.checked == false){
       node_class.disabled = false;
     }
-    if (jsl_class.checked == false){
-      node_class.disabled = false;
+    if (node_class.checked == false){
+      jsl_class.disabled = false;
     }}
     //Validator for Schedule
     act_warn=document.querySelector("#act_required");
@@ -303,19 +306,21 @@ function validator(){
 
 
 
+pay_label=document.querySelector("label[for='payment']");
+pay_label.innerHTML="I\'m going to pay with:"
 
 //final verificaiton
+
 if (payment_drop.value=="credit card"){
   console.log(payment_drop.value);
   if(cc_ok && zip_ok && cvv_ok && email_ok && name_ok && (cc_spec==false)){
   warnings=true;}
   else {warnings=false;}}
-else {
+else if (payment_drop.value=="bitcoin"||payment_drop.value=="paypal"){
   console.log(payment_drop.value);
   if(email_ok && name_ok){warnings=true;}
   else {warnings=false;}}
-
-
+else {pay_label.innerHTML='I\'m going to pay with: <span class="warning"> Payment Required</span>';}
 console.log(cc_ok,zip_ok,cvv_ok, email_ok,name_ok, cc_spec, warnings, scheduling);
 
 }
@@ -375,10 +380,11 @@ document.getElementById("check_submit").addEventListener("click", function(event
 
     event.preventDefault()
       console.log(payment_drop.value);
+      checkTheme();
       validator();
       console.log(warnings,scheduling)
 
-    if (warnings && scheduling){
+    if (warnings && scheduling && (design.value=="js puns"||design.value=="heart js")){
       document.querySelector("form").submit()}
     else {
 
