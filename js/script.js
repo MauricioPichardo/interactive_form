@@ -67,7 +67,7 @@ else {
 //function to hide colors (In Progress)
 
 function noTheme() {
-      color_theme.innerHTML= 'Please select a T-shirt theme';
+      color_theme.innerHTML= '<span class="warning">Please select a T-shirt theme</span>';
       color_drop.style.display="none";
 
 };
@@ -76,24 +76,33 @@ function noTheme() {
 
 const checkTheme=() =>{
   color_theme.innerHTML= 'Color:';
-  color_drop.style.display="block";
-  if (design.value=="js puns"){
-        for (let i = 0; i < 3; i++) {
-          color.options[i].style.display="block";
-          }
-          for (let i = 3; i < 6; i++) {
-            color.options[i].style.display="none";
-          }
-        }
+  for (let i = 0; i < 6; i++) {
+    color.options[i].display="none";
 
-    else if(design.value=="heart js"){
+    }
+
+
+  if (design.value=="js puns"){
+  color_drop.style.display="block";
+  color_drop.value="darkslategrey";
         for (let i = 0; i < 3; i++) {
-        color.options[i].style.display="none";
-        }
+          color.options[i].display="block";
+
+          }
+
+    }
+    else if(design.value=="heart js"){
+    color_drop.style.display="block";
+    color_drop.value="steelblue";
         for (let i = 3; i < 6; i++) {
         color.options[i].style.display="block";
-        }}
-    else  color_theme.innerHTML= 'Color: <span class="warning"> Selection Required</span>';
+
+
+        }
+
+      }
+    else  noTheme();
+
     }
 
 
@@ -321,7 +330,7 @@ else if (payment_drop.value=="bitcoin"||payment_drop.value=="paypal"){
   if(email_ok && name_ok){warnings=true;}
   else {warnings=false;}}
 else {pay_label.innerHTML='I\'m going to pay with: <span class="warning"> Payment Required</span>';}
-console.log(cc_ok,zip_ok,cvv_ok, email_ok,name_ok, cc_spec, warnings, scheduling);
+
 
 }
 
