@@ -77,18 +77,20 @@ function noTheme() {
 const checkTheme=() =>{
   color_theme.innerHTML= 'Color:';
   for (let i = 0; i < 6; i++) {
-    color.options[i].display="none";
+    color.options[i].style.display="none";
+    console.log(1);
 
     }
 
 
   if (design.value=="js puns"){
-  color_drop.style.display="block";
-  color_drop.value="darkslategrey";
+    color_drop.style.display="block";
+    color_drop.value="cornflowerblue";
         for (let i = 0; i < 3; i++) {
-          color.options[i].display="block";
+        color.options[i].style.display="block";
+        console.log("js");
 
-          }
+        }
 
     }
     else if(design.value=="heart js"){
@@ -96,7 +98,7 @@ const checkTheme=() =>{
     color_drop.value="steelblue";
         for (let i = 3; i < 6; i++) {
         color.options[i].style.display="block";
-
+        console.log("heart");
 
         }
 
